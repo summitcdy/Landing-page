@@ -1,0 +1,6 @@
+{
+  "name": "The Sunday Basket — Roasted Makhana",
+  "description": "A futuristic, interactive luxury landing page and brand experience for The Sunday Basket premium roasted makhana snack brand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
