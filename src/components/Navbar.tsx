@@ -27,12 +27,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { name: 'Flavours', href: '#flavours' },
-    { name: 'Experience', href: '#interactive' },
-    { name: 'Nutrition', href: '#nutrition' },
-    { name: 'Ingredients', href: '#ingredients' },
-    { name: 'Our Story', href: '#story' },
-    { name: 'Freshness', href: '#freshness' },
+    { name: 'Home', href: '#' },
+    { name: 'Shop Sunday', href: '#shop-by-moment', highlight: 'sunday' },
+    { name: 'Shop the Week', href: '#two-pillars', highlight: 'week' },
+    { name: 'Gifting', href: '#reviews-conversion' },
+    { name: 'Our Story', href: '#provenance' },
+    { name: 'Sunday Notes', href: '#nutrition' },
+    { name: 'Support / FAQ', href: '#faq' },
   ];
 
   return (
@@ -75,15 +76,28 @@ export const Navbar: React.FC<NavbarProps> = ({
           id="desktop-nav-links"
           className="hidden md:flex items-center gap-1.5 lg:gap-2 px-5 py-2 rounded-full bg-white/70 dark:bg-[#1E1B17]/80 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xs"
         >
-          {navLinks.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2B2B2B] dark:text-[#F5F2EB] hover:text-black dark:hover:text-white transition-colors rounded-full hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navLinks.map((item) => {
+            const isSunday = item.highlight === 'sunday';
+            const isWeek = item.highlight === 'week';
+
+            return (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all rounded-full cursor-pointer flex items-center gap-1.5 ${
+                  isSunday
+                    ? 'bg-amber-500/15 text-amber-800 dark:text-amber-300 hover:bg-amber-500/25 border border-amber-500/30'
+                    : isWeek
+                    ? 'bg-teal-500/15 text-teal-800 dark:text-teal-300 hover:bg-teal-500/25 border border-teal-500/30'
+                    : 'text-[#2B2B2B] dark:text-[#F5F2EB] hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
+                }`}
+              >
+                {isSunday && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
+                {isWeek && <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />}
+                <span>{item.name}</span>
+              </a>
+            );
+          })}
           <button
             onClick={() => onOpenComingSoon('Contact Concierge')}
             className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2B2B2B] dark:text-[#F5F2EB] hover:text-black dark:hover:text-white transition-colors rounded-full hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer"

@@ -4,6 +4,7 @@ import { FlavourTheme } from '../types';
 
 interface InteractivePouchProps {
   currentFlavour: FlavourTheme;
+  selectedSize?: string;
   isZoomed?: boolean;
   onInspectDetails?: () => void;
   className?: string;
@@ -12,6 +13,7 @@ interface InteractivePouchProps {
 
 export const InteractivePouch: React.FC<InteractivePouchProps> = ({
   currentFlavour,
+  selectedSize = '40g',
   className = '',
   showExploreHint = true,
 }) => {
@@ -147,14 +149,15 @@ export const InteractivePouch: React.FC<InteractivePouchProps> = ({
         </div>
 
         {/* Pouch Container */}
-        <div className="relative w-[270px] sm:w-[310px] md:w-[340px] max-w-full aspect-[3/4] rounded-[30px] overflow-hidden shadow-2xl transition-shadow duration-500 border-4 border-white/50">
-          {/* Real Pouch Artwork */}
+        <div className="relative w-[270px] sm:w-[310px] md:w-[340px] max-w-full aspect-[3/4] rounded-[30px] overflow-hidden shadow-2xl transition-shadow duration-500 border-4 border-white/50 bg-[#16120F]">
+          {/* Real Pouch Artwork with Smooth Material Swap / Cross-Fade */}
           <img
-            src={currentFlavour.pouchImage}
+            key={`${currentFlavour.id}-${currentFlavour.image || currentFlavour.pouchImage}`}
+            src={currentFlavour.image || currentFlavour.pouch3dTexture || currentFlavour.pouchImage}
             alt={`${currentFlavour.name} roasted makhana pouch`}
             referrerPolicy="no-referrer"
             onLoad={() => setImageLoaded(true)}
-            className={`w-full h-full object-cover object-center transition-all duration-700 ${
+            className={`w-full h-full object-cover object-center transition-all duration-700 ease-out ${
               imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             } ${isZoomActive ? 'scale-110' : ''}`}
           />
@@ -193,9 +196,9 @@ export const InteractivePouch: React.FC<InteractivePouchProps> = ({
           {/* Physical Pouch Edge Reflection */}
           <div className="absolute inset-0 pointer-events-none rounded-[26px] ring-1 ring-white/60 shadow-inner" />
 
-          {/* Subtle tactile Frosted Glass Foil Badge indicator */}
+          {/* Synchronized Net Weight Badge */}
           <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-mono-tech tracking-[0.2em] uppercase font-bold bg-white/40 backdrop-blur-md text-[#2B2B2B] border border-white/60 shadow-xs">
-            80G NET WT.
+            {selectedSize.toUpperCase()} NET WT.
           </div>
 
           {/* Zoom In Active Indicator */}

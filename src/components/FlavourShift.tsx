@@ -17,7 +17,11 @@ export const FlavourShift: React.FC<FlavourShiftProps> = ({
   onOpenComingSoon,
 }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const flavourList: FlavourTheme[] = Object.values(allFlavours) as FlavourTheme[];
+  // Restrict to the 5 core launch flavours per Master Brief
+  const coreIds: FlavourId[] = ['peri-peri', 'ghee-roasted', 'salt-pepper', 'cheese-herbs', 'mint-pudina'];
+  const flavourList: FlavourTheme[] = coreIds
+    .map((id) => allFlavours[id])
+    .filter(Boolean) as FlavourTheme[];
 
   const handleFlavourChange = (id: FlavourId) => {
     if (id === currentFlavour.id) return;
@@ -55,7 +59,7 @@ export const FlavourShift: React.FC<FlavourShiftProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-tech tracking-widest uppercase mb-4 border border-white/60 dark:border-white/15 bg-white/40 dark:bg-white/5 backdrop-blur-xl">
             <Sparkles className="w-3.5 h-3.5" style={{ color: currentFlavour.accentColor }} />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#2B2B2B]/75 dark:text-[#F5F2EB]/75">The Flavour Shift • Three Personalities</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#2B2B2B]/75 dark:text-[#F5F2EB]/75">The Flavour Shift • Five Core Personalities</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl font-serif-luxury font-normal text-[#1A1A1A] dark:text-white tracking-tight leading-tight">
@@ -65,7 +69,7 @@ export const FlavourShift: React.FC<FlavourShiftProps> = ({
               className="italic transition-colors duration-700 font-light"
               style={{ color: currentFlavour.accentColor }}
             >
-              Three Masterpiece Roasts.
+              Five Masterpiece Roasts.
             </span>
           </h2>
 
@@ -74,8 +78,8 @@ export const FlavourShift: React.FC<FlavourShiftProps> = ({
           </p>
         </div>
 
-        {/* Floating Frosted Flavour Switcher Buttons (State 01, 02, 03) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mb-16">
+        {/* Floating Frosted Flavour Switcher Buttons (Core 5) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5 mb-16">
           {flavourList.map((flv, idx) => {
             const isSelected = flv.id === currentFlavour.id;
             return (

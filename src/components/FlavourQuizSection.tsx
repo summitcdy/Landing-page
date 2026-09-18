@@ -25,6 +25,8 @@ export const FlavourQuizSection: React.FC<FlavourQuizSectionProps> = ({
         return Film;
       case 'peri-peri':
         return Flame;
+      default:
+        return Sparkles;
     }
   };
 
