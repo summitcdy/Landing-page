@@ -204,7 +204,7 @@ export const ChooseYourSundayCrunch: React.FC<ChooseYourSundayCrunchProps> = ({
                 : 'bg-white/50 dark:bg-white/5 text-[#5A5A5A] dark:text-[#A8A29E] hover:bg-white dark:hover:bg-white/10 border border-white/60 dark:border-white/10'
             }`}
           >
-            Spicy & Zesty
+            Spicy & Testy
           </button>
           <button
             onClick={() => setFilterCategory('savory')}

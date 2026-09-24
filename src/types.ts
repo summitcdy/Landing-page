@@ -6,7 +6,7 @@ export type FlavourId =
   | 'mint-pudina'
   | 'himalayan-salt'
   | 'cheese'
-  | 'magic-masala'
+  | 'maggie-masala'
   | 'chettinad-tomato'
   | 'cream-onion'
   | 'mint'
